@@ -16,13 +16,14 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.IBinder;
 import android.os.SystemClock;
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import android.util.Log;
-import android.widget.Toast;
-import android.os.IBinder;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -219,6 +220,7 @@ public class DaqService extends Service implements Frame.OnFrameCallback {
         num     = cfg.getInteger("num", 1);
         delay   = cfg.getInteger("delay", 0);
         String analysis_name = cfg.getString("analysis", "");
+        analysis_name = "PixelStats";
 
         App.log().append("analysis:       " + analysis_name + "\n")
                 .append("num of images:  " + num + "\n")
@@ -226,7 +228,7 @@ public class DaqService extends Service implements Frame.OnFrameCallback {
                 .append("delay:          " + delay + "\n");
 
         switch (analysis_name.toLowerCase()) {
-            case "pixelstats":
+            case "pixelstats":App.log().append(analysis +"\n");
                 analysis = new PixelStats(cfg);
                 break;
             case "photo":
@@ -241,6 +243,18 @@ public class DaqService extends Service implements Frame.OnFrameCallback {
         }
 
         App.log().append("starting run " + run_num + "\n");
+
+
+
+        /*
+        App.log().append("Hello World\n");
+
+        HelloWorld helloworld = new HelloWorld();
+                helloworld.PRINT();
+        */
+
+
+
         App.log().append("Finished initialization.\n");
 
         if ((!run_finished) && (delay > 0)) {

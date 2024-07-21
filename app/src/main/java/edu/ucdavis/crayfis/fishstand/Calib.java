@@ -87,7 +87,7 @@ public class Calib {
             App.log().append("...\n");
             App.log().append("pixel " + hot[num_hot - 2] + "\n");
             App.log().append("pixel " + hot[num_hot - 1] + "\n");
-        }
+        } // wut is this
 
         App.log().append("reading lens shading calibration...\n");
         try {
