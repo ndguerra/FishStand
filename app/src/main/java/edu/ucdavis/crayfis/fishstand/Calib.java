@@ -94,12 +94,19 @@ public class Calib {
             InputStream tmp = new FileInputStream(Storage.getFile("pixel_weight.cal"));
             DataInputStream input = new DataInputStream(tmp);
             wgt_hash = input.readInt();
-            nx = input.readInt();
-            ny = input.readInt();
+            nx = width; //input.readInt();
+            ny = height; //input.readInt();
             ds = input.readInt();
             lx = input.readInt();
             ly = input.readInt();
             num_wgt = lx * ly;
+
+            App.log().append("wgt_hash: "+ wgt_hash+ "\n");
+            App.log().append("nx: " + nx+ "\n");
+            App.log().append("ny: " + ny+ "\n");
+            App.log().append("ds: " + ds+ "\n");
+            App.log().append("lx: " + lx+ "\n");
+            App.log().append("ly: " + ly+ "\n");
 
             wgt = new float[num_wgt];
             for (int i=0; i<num_wgt; i++) {
@@ -124,8 +131,8 @@ public class Calib {
 
         App.log().append("read " + num_wgt + " lens shading weights.\n");
         App.log().append("hash code:    " + wgt_hash + "\n");
-        App.log().append("nx:           " + nx + "\n");
-        App.log().append("ny:           " + ny + "\n");
+        //App.log().append("nx:           " + nx + "\n");
+        //App.log().append("ny:           " + ny + "\n");
         App.log().append("down_sample:  " + ds + "\n");
         App.log().append("lx:           " + lx + "\n");
         App.log().append("ly:           " + ly + "\n");

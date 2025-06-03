@@ -34,8 +34,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import edu.ucdavis.crayfis.fishstand.analysis.Analysis;
 import edu.ucdavis.crayfis.fishstand.analysis.Cosmics;
-import edu.ucdavis.crayfis.fishstand.analysis.Photo;
 import edu.ucdavis.crayfis.fishstand.analysis.PixelStats;
+import edu.ucdavis.crayfis.fishstand.analysis.Photo;
 import edu.ucdavis.crayfis.fishstand.camera.Frame;
 
 public class DaqService extends Service implements Frame.OnFrameCallback {
@@ -220,13 +220,13 @@ public class DaqService extends Service implements Frame.OnFrameCallback {
         num     = cfg.getInteger("num", 1);
         delay   = cfg.getInteger("delay", 0);
         String analysis_name = cfg.getString("analysis", "");
-        analysis_name = "PixelStats";
 
         App.log().append("analysis:       " + analysis_name + "\n")
                 .append("num of images:  " + num + "\n")
                 .append("job tag:        " + job_tag + "\n")
                 .append("delay:          " + delay + "\n");
 
+        
         switch (analysis_name.toLowerCase()) {
             case "pixelstats":App.log().append(analysis +"\n");
                 analysis = new PixelStats(cfg);
@@ -246,12 +246,6 @@ public class DaqService extends Service implements Frame.OnFrameCallback {
 
 
 
-        /*
-        App.log().append("Hello World\n");
-
-        HelloWorld helloworld = new HelloWorld();
-                helloworld.PRINT();
-        */
 
 
 
@@ -370,6 +364,8 @@ public class DaqService extends Service implements Frame.OnFrameCallback {
             }
             return;
         } else if(num_frames <= num) {
+            long request = App.getCamera().getExposure();
+            SystemClock.sleep(500 - request / 1000000);
             try {
                 AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() {
                     @Override

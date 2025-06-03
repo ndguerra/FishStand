@@ -1,9 +1,10 @@
 package edu.ucdavis.crayfis.fishstand;
 
 import android.os.Environment;
-import androidx.annotation.Nullable;
 import android.util.Log;
 import android.util.Pair;
+
+import androidx.annotation.Nullable;
 
 import java.io.BufferedReader;
 import java.io.File;
